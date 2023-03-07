@@ -9,7 +9,8 @@
             <Private>false</Private>
             <ExcludeAssets>runtime</ExcludeAssets>
         </ProjectReference>
-        <PackageReference Include="ParquetSharp" Version="10.0.1"/>
+        <PackageReference Include="MathNet.Numerics" Version="3.20.2"/>
+        <PackageReference Include="MathNet.Numerics.MKL.Win" Version="2.5.0"/>
     </ItemGroup>
 
 </Project>

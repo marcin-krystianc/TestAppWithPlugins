@@ -1,6 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using System.Runtime.Loader;
 using Microsoft.Extensions.DependencyModel;
@@ -10,24 +12,43 @@ class TestPluginsAlc
 {
     static void Main(string[] args)
     {
-        var alc601 = new PluginAlc(@"D:\workspace\TestParquetSharpAlcPlugins\Plugin601\bin\Debug\net7.0\win-x64\publish\Plugin601.dll");
-        //var pluginAssembly = alc.LoadFromAssemblyName(assemblyName);
+        var paths = new[]
+        {
+            @"D:\workspace\TestParquetSharpAlcPlugins\Plugin601\bin\Debug\net6.0\publish\Plugin601.dll",
+            @"D:\workspace\TestParquetSharpAlcPlugins\Plugin1001\bin\Debug\net6.0\publish\Plugin1001.dll",
+            @"D:\workspace\TestParquetSharpAlcPlugins\MathNet3x\bin\Debug\net6.0\publish\MathNet3x.dll",
+            @"D:\workspace\TestParquetSharpAlcPlugins\MathNet50\bin\Debug\net6.0\publish\MathNet50.dll",
+        };
         
-        var plugin601Assembly = alc601.LoadFromAssemblyName(new AssemblyName("Plugin601"));
-        var dependency601Context = DependencyContext.Load(plugin601Assembly);
-        var plugin601Command = CreateCommand(plugin601Assembly);
-        var plugin601Result = plugin601Command.GetResult("MyPath.parquet");
-        Console.WriteLine($"{plugin601Result}");
+        var plugins = LoadPlugins(paths);
         
-        var alc1001 = new PluginAlc(@"D:\workspace\TestParquetSharpAlcPlugins\Plugin1001\bin\Debug\net7.0\win-x64\publish\Plugin1001.dll");
-        var plugin1001Assembly = alc1001.LoadFromAssemblyName(new AssemblyName("Plugin1001"));
-        var dependency1001Context = DependencyContext.Load(plugin1001Assembly);
-        var plugin1001Command = CreateCommand(plugin1001Assembly);
-        var plugin1001Result = plugin1001Command.GetResult("MyPath.parquet");
-        Console.WriteLine($"{plugin1001Result}");
+        for (int i = 0; i < 2; i++)
+        {
+            foreach (var plugin in plugins)
+            { 
+                var result = plugin.GetResult("MyPath.parquet");
+                Console.WriteLine($"{result}");
+            }
+        }
     }
 
-    static IMyPlugin CreateCommand(Assembly assembly)
+    static IReadOnlyList<IMyPlugin> LoadPlugins(IEnumerable<string> paths)
+    {
+        var result = new List<IMyPlugin>();
+        
+        foreach (var path in paths)
+        {  
+            var alc = new PluginAlc(path);
+            var pluginAssembly = alc.LoadFromAssemblyName(new AssemblyName(Path.GetFileNameWithoutExtension(path)));
+            //var dependencyContext = DependencyContext.Load(pluginAssembly);
+            var plugin = CreatePlugin(pluginAssembly);
+            result.Add(plugin);
+        }
+
+        return result;
+    }
+
+    static IMyPlugin CreatePlugin(Assembly assembly)
     {
         int count = 0;
 
