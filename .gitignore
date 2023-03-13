@@ -1,4 +1,9 @@
 \.idea
+\.vs
 \obj
 \bin
 /TestParquetSharpAlcPlugins.sln.DotSettings.user
+Debug
+Release
+*.filters
+*.user

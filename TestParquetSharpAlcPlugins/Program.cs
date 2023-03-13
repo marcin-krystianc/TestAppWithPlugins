@@ -14,10 +14,14 @@ class TestPluginsAlc
     {
         var paths = new[]
         {
+            //@"D:\workspace\TestParquetSharpAlcPlugins\PluginA2\bin\Debug\net6.0\publish\PluginA2.dll",
+            //@"D:\workspace\TestParquetSharpAlcPlugins\PluginA1\bin\Debug\net6.0\publish\PluginA1.dll",
             @"D:\workspace\TestParquetSharpAlcPlugins\Plugin601\bin\Debug\net6.0\publish\Plugin601.dll",
+            /*
             @"D:\workspace\TestParquetSharpAlcPlugins\Plugin1001\bin\Debug\net6.0\publish\Plugin1001.dll",
             @"D:\workspace\TestParquetSharpAlcPlugins\MathNet3x\bin\Debug\net6.0\publish\MathNet3x.dll",
             @"D:\workspace\TestParquetSharpAlcPlugins\MathNet50\bin\Debug\net6.0\publish\MathNet50.dll",
+            */
         };
         
         var plugins = LoadPlugins(paths);
@@ -25,9 +29,12 @@ class TestPluginsAlc
         for (int i = 0; i < 2; i++)
         {
             foreach (var plugin in plugins)
-            { 
-                var result = plugin.GetResult("MyPath.parquet");
-                Console.WriteLine($"{result}");
+            {
+                using (var scope = AssemblyLoadContext.EnterContextualReflection(plugin.GetType().Assembly))
+                {
+                    var result = plugin.GetResult("MyPath.parquet");
+                    Console.WriteLine($"{result}");
+                }
             }
         }
     }
@@ -40,6 +47,7 @@ class TestPluginsAlc
         {  
             var alc = new PluginAlc(path);
             var pluginAssembly = alc.LoadFromAssemblyName(new AssemblyName(Path.GetFileNameWithoutExtension(path)));
+            using var scope = AssemblyLoadContext.EnterContextualReflection(pluginAssembly);
             //var dependencyContext = DependencyContext.Load(pluginAssembly);
             var plugin = CreatePlugin(pluginAssembly);
             result.Add(plugin);
@@ -84,13 +92,14 @@ class PluginAlc : AssemblyLoadContext
     protected override Assembly Load(AssemblyName assemblyName)
     {
         var assemblyPath = _resolver.ResolveAssemblyToPath(assemblyName);
+        Console.WriteLine($"Load '{assemblyName.FullName}' = '{assemblyPath}'");
         return assemblyPath != null ? LoadFromAssemblyPath(assemblyPath) : null;
     }
     protected override IntPtr LoadUnmanagedDll(string unmanagedDllName)
     {
         var assemblyPath = _resolver.ResolveUnmanagedDllToPath(unmanagedDllName);
         
-        Console.WriteLine($"{assemblyPath}");
+        Console.WriteLine($"LoadUnmanagedDll '{assemblyPath}'");
         return assemblyPath != null ? LoadUnmanagedDllFromPath(assemblyPath) : IntPtr.Zero;
     }
 }
