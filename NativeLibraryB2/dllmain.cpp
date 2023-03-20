@@ -1,4 +1,5 @@
 #include <windows.h>
+#include "..\NativeLibraryA1\NativeLibraryA1.h"
 
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 {
@@ -18,7 +19,7 @@ extern "C" {
 __declspec(dllexport)
 INT APIENTRY GetIntegerB()
 {
-    //HINSTANCE hinstLib = LoadLibrary(TEXT("D:\\workspace\\TestParquetSharpAlcPlugins\\NativeLibraryA1\\out\\Debug\\x64\\NativeLibraryA.dll"));
+    //HINSTANCE hinstLib = LoadLibrary(TEXT("D:\\workspace\\TestParquetSharpAlcPlugins\\NativeLibraryA2\\out\\Debug\\x64\\NativeLibraryA.dll"));
     HINSTANCE hinstLib = LoadLibrary(TEXT("NativeLibraryA.dll"));
 
     // If the handle is valid, try to get the function address.
@@ -32,13 +33,13 @@ INT APIENTRY GetIntegerB()
 
         if (NULL != ProcAdd)
         {
-            return 0xB100 + (ProcAdd)();
+            return 0xB200 + (ProcAdd)();
         }
 
         // Free the DLL module.
         //FreeLibrary(hinstLib);
     }
 
-    return 0xB1;
+    return 0xB2;
 }
 }
