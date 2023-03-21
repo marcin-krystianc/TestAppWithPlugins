@@ -12,6 +12,13 @@
         },
         "runtime": {
           "PluginA1.dll": {}
+        },
+		"runtimeTargets": {          
+          "NativeLibraryA.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
         }
       }
     }
