@@ -12,6 +12,15 @@
             <Private>false</Private>
             <ExcludeAssets>runtime</ExcludeAssets>
         </ProjectReference>
-    </ItemGroup>
 
+        <ProjectReference Include="..\NativeLibraryA2\NativeLibraryA2.vcxproj">
+            <Project>{FF1D731A-9A43-44BF-B43D-AA212EE5DE1B}</Project>
+            <Name>mycppproject</Name>
+            <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+            <OutputItemType>Content</OutputItemType>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </ProjectReference>
+        
+    </ItemGroup>
+    
 </Project>

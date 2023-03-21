@@ -13,6 +13,22 @@
             <ExcludeAssets>runtime</ExcludeAssets>
         </ProjectReference>
 
+        <ProjectReference Include="..\NativeLibraryA2\NativeLibraryA2.vcxproj">
+            <Project>{FF1D731A-9A43-44BF-B43D-AA212EE5DE1B}</Project>
+            <Name>mycppproject</Name>
+            <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+            <OutputItemType>Content</OutputItemType>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </ProjectReference>
+        
+        <ProjectReference Include="..\NativeLibraryB2\NativeLibraryB2.vcxproj">
+            <Project>{78af0e47-44de-4e52-b936-aca741b0986a}</Project>
+            <Name>mycppproject</Name>
+            <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+            <OutputItemType>Content</OutputItemType>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </ProjectReference>
+
     </ItemGroup>
 
 </Project>
