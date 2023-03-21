@@ -4,3 +4,4 @@ See also:
 - https://github.com/G-Research/gr-oss/issues/368
 - https://github.com/dotnet/samples/tree/main/core/extensions/AppWithPlugin
 - https://github.com/dotnet/runtime/issues/45285
+- https://learn.microsoft.com/en-us/dotnet/core/dependency-loading/overview
