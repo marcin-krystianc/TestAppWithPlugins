@@ -21,8 +21,8 @@ class TestPluginsAlc
             @"D:\workspace\TestParquetSharpAlcPlugins\PluginC2\bin\Debug\net6.0\PluginC2.dll",
             @"D:\workspace\TestParquetSharpAlcPlugins\PluginB1\bin\Debug\net6.0\PluginB1.dll",
             @"D:\workspace\TestParquetSharpAlcPlugins\PluginB2\bin\Debug\net6.0\PluginB2.dll",
-            @"D:\workspace\TestParquetSharpAlcPlugins\Plugin601\bin\Debug\net6.0\Plugin601.dll",
-            @"D:\workspace\TestParquetSharpAlcPlugins\Plugin1001\bin\Debug\net6.0\Plugin1001.dll",
+            //@"D:\workspace\TestParquetSharpAlcPlugins\Plugin601\bin\Debug\net6.0\Plugin601.dll",
+            //@"D:\workspace\TestParquetSharpAlcPlugins\Plugin1001\bin\Debug\net6.0\Plugin1001.dll",
             //@"D:\workspace\TestParquetSharpAlcPlugins\MathNet3x\bin\Debug\net6.0\MathNet3x.dll",
             //@"D:\workspace\TestParquetSharpAlcPlugins\MathNet50\bin\Debug\net6.0\MathNet50.dll",
         };
