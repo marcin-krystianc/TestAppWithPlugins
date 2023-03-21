@@ -15,16 +15,16 @@ class TestPluginsAlc
     {
         var paths = new[]
         {
-            @"D:\workspace\TestParquetSharpAlcPlugins\PluginA1\bin\Debug\net6.0\PluginA1.dll",
-            @"D:\workspace\TestParquetSharpAlcPlugins\PluginA2\bin\Debug\net6.0\PluginA2.dll",
-            @"D:\workspace\TestParquetSharpAlcPlugins\PluginC1\bin\Debug\net6.0\PluginC1.dll",
-            @"D:\workspace\TestParquetSharpAlcPlugins\PluginC2\bin\Debug\net6.0\PluginC2.dll",
-            @"D:\workspace\TestParquetSharpAlcPlugins\PluginB1\bin\Debug\net6.0\PluginB1.dll",
-            @"D:\workspace\TestParquetSharpAlcPlugins\PluginB2\bin\Debug\net6.0\PluginB2.dll",
-            //@"D:\workspace\TestParquetSharpAlcPlugins\Plugin601\bin\Debug\net6.0\Plugin601.dll",
-            //@"D:\workspace\TestParquetSharpAlcPlugins\Plugin1001\bin\Debug\net6.0\Plugin1001.dll",
-            //@"D:\workspace\TestParquetSharpAlcPlugins\MathNet3x\bin\Debug\net6.0\MathNet3x.dll",
-            //@"D:\workspace\TestParquetSharpAlcPlugins\MathNet50\bin\Debug\net6.0\MathNet50.dll",
+            @"PluginA1\bin\Debug\net6.0\PluginA1.dll",
+            @"PluginA2\bin\Debug\net6.0\PluginA2.dll",
+            @"PluginC1\bin\Debug\net6.0\PluginC1.dll",
+            @"PluginC2\bin\Debug\net6.0\PluginC2.dll",
+            @"PluginB1\bin\Debug\net6.0\PluginB1.dll",
+            @"PluginB2\bin\Debug\net6.0\PluginB2.dll",
+            @"Plugin601\bin\Debug\net6.0\Plugin601.dll",
+            @"Plugin1001\bin\Debug\net6.0\Plugin1001.dll",
+            @"MathNet3x\bin\Debug\net6.0\MathNet3x.dll",
+            @"MathNet50\bin\Debug\net6.0\MathNet50.dll",
         };
 
         AssemblyLoadContext.Default.ResolvingUnmanagedDll += (assembly, s) =>
@@ -57,12 +57,15 @@ class TestPluginsAlc
 
     static IReadOnlyList<IMyPlugin> LoadPlugins(IEnumerable<string> paths)
     {
+        var thisPath = Assembly.GetEntryAssembly().Location;
+        var rootPath = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(thisPath)))));
         var result = new List<IMyPlugin>();
         
         foreach (var path in paths)
-        {  
-            var alc = new PluginAlc(path);
-            var pluginAssembly = alc.LoadFromAssemblyName(new AssemblyName(Path.GetFileNameWithoutExtension(path)));
+        {
+            var fullPath = Path.Combine(rootPath, path);
+            var alc = new PluginAlc(fullPath);
+            var pluginAssembly = alc.LoadFromAssemblyName(new AssemblyName(Path.GetFileNameWithoutExtension(fullPath)));
             using var scope = AssemblyLoadContext.EnterContextualReflection(pluginAssembly);
             //var dependencyContext = DependencyContext.Load(pluginAssembly);
             var plugin = CreatePlugin(pluginAssembly);

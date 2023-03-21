@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plugin601", "Plugin601\Plug
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plugin1001", "Plugin1001\Plugin1001.csproj", "{DB9AB28C-7F82-47B3-BB99-C4355CD201C0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestParquetSharpAlcPlugins", "TestParquetSharpAlcPlugins\TestParquetSharpAlcPlugins.csproj", "{AAE50F25-6FF4-40E3-96CA-8DDB771850F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppWithPlugins", "AppWithPlugins\AppWithPlugins.csproj", "{AAE50F25-6FF4-40E3-96CA-8DDB771850F0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MathNet50", "MathNet50\MathNet50.csproj", "{F3DEA9A3-9A4B-4282-8653-E71D543F91E8}"
 EndProject

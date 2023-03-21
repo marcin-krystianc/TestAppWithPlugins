@@ -12,18 +12,6 @@
         },
         "runtime": {
           "PluginB1.dll": {}
-        },
-		"runtimeTargets": {          
-          "NativeLibraryA.dll": {
-            "rid": "win-x64",
-            "assetType": "native",
-            "fileVersion": "0.0.0.0"
-          },
-		  "NativeLibraryB.dll": {
-            "rid": "win-x64",
-            "assetType": "native",
-            "fileVersion": "0.0.0.0"
-          }
         }
       }
     }
